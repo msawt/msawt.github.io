@@ -83,8 +83,8 @@
       
       // Update the timer display every second
       timerInterval = setInterval(function() {
-        const minutes = Math.floor(totalTime / (60* 1000)).toString().padStart(2, '0');
-        const seconds = (totalTime % (60 * 1000)).toString().padStart(2, '0');
+        const minutes = Math.floor(totalTime / (60)).toString().padStart(2, '0');
+        const seconds = (totalTime % (60)).toString().padStart(2, '0');
         timerElement.textContent = `${minutes}:${seconds}`;
         
         // Check if subdivision interval is reached and play the bell sound
