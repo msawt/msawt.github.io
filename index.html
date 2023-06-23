@@ -49,9 +49,7 @@
   <button id="startButton">Start</button>
   
   <!-- Audio element for bell sound -->
-  <audio id="bellAudio">
-    <source src="bell.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bellAudio" src="bell.mp3"></audio>
   
   <script>
     // Timer variables
@@ -92,7 +90,7 @@
         timerElement.textContent = `${minutes}:${seconds}`;
         
         // Check if subdivision interval is reached and play the bell sound
-        if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime !== startTime) {
+        if (totalTime > 0 && totalTime % intervalCount === 0) {
           bellAudio.play();
         }
         
