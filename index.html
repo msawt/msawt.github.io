@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Meditation Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 50px;
+    }
+    .timer {
+      font-size: 48px;
+      margin-top: 30px;
+    }
+    button {
+      font-size: 24px;
+      margin-top: 20px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <h1>Meditation Timer</h1>
+  
+  <label for="time">Enter time to meditate (min:sec):</label>
+  <input type="text" id="time" placeholder="00:00">
+  
+  <label for="subdivision">Select subdivision:</label>
+  <select id="subdivision">
+    <option value="1">None</option>
+    <option value="2">Halves</option>
+    <option value="4">Quarters</option>
+    <!-- Add more options as needed -->
+  </select>
+  
+  <div class="timer">00:00</div>
+  
+  <button id="startButton">Start</button>
+  
+  <!-- Audio element for bell sound -->
+  <audio id="bellAudio">
+    <source src="bell.mp3" type="audio/mpeg">
+  </audio>
+  
+  <script>
+    // Timer variables
+    let timerInterval;
+    let totalTime;
+    let subdivision;
+    
+    // Get HTML elements
+    const timerElement = document.querySelector('.timer');
+    const startButton = document.querySelector('#startButton');
+    const bellAudio = document.querySelector('#bellAudio');
+    const timeInput = document.querySelector('#time');
+    
+    // Event listener for start button
+    startButton.addEventListener('click', function() {
+      // Get selected time and subdivision values
+      const timeParts = timeInput.value.split(':');
+      const minutes = parseInt(timeParts[0], 10);
+      const seconds = parseInt(timeParts[1], 10);
+      totalTime = minutes * 60 + seconds;
+      subdivision = parseInt(document.querySelector('#subdivision').value, 10);
+      
+      // Disable the start button
+      startButton.disabled = true;
+      
+      // Calculate subdivision interval
+      const interval = subdivision > 1 ? Math.floor(totalTime / subdivision) : totalTime;
+      
+      // Update the timer display every second
+      timerInterval = setInterval(function() {
+        const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+        const seconds = (totalTime % 60).toString().padStart(2, '0');
+        timerElement.textContent = `${minutes}:${seconds}`;
+        
+        // Check if subdivision interval is reached
+        if (subdivision > 1 && totalTime % interval === 0) {
+          // Play the bell sound
+          bellAudio.play();
+        }
+        
+        // Check if the timer has reached zero
+        if (totalTime === 0) {
+          // Stop the timer
+          clearInterval(timerInterval);
+          timerElement.textContent = '00:00';
+          startButton.disabled = false;
+        }
+        
+        totalTime--;
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
