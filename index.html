@@ -69,41 +69,41 @@
     
     // Event listener for start button
     startButton.addEventListener('click', function() {
-      // Get selected time and subdivision values
-      const timeParts = timeInput.value.split(':');
-      const minutes = parseInt(timeParts[0], 10);
-      const seconds = parseInt(timeParts[1], 10);
-      totalTime = minutes * 60 + seconds;
-      startTime = minutes * 60 + seconds;
-      subdivision = parseInt(document.querySelector('#subdivision').value, 10);
-      intervalCount = Math.floor(totalTime / subdivision);
+    // Get selected time and subdivision values
+    const timeParts = timeInput.value.split(':');
+    const minutes = parseFloat(timeParts[0]);
+    const seconds = parseFloat(timeParts[1]);
+    totalTime = (isNaN(minutes) ? 0 : minutes) * 60 + (isNaN(seconds) ? 0 : seconds);
+    startTime = totalTime;
+    subdivision = parseInt(document.querySelector('#subdivision').value, 10);
+    intervalCount = Math.floor(totalTime / subdivision);
+    
+    // Disable the start button
+    startButton.disabled = true;
+    
+    // Update the timer display every second
+    timerInterval = setInterval(function() {
+      const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+      const seconds = (totalTime % 60).toString().padStart(2, '0');
+      timerElement.textContent = `${minutes}:${seconds}`;
       
-      // Disable the start button
-      startButton.disabled = true;
+      // Check if subdivision interval is reached and play the bell sound
+      if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime != startTime) {
+        bellAudio.play();
+      }
       
-      // Update the timer display every second
-      timerInterval = setInterval(function() {
-        const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
-        const seconds = (totalTime % 60).toString().padStart(2, '0');
-        timerElement.textContent = `${minutes}:${seconds}`;
-        
-        // Check if subdivision interval is reached and play the bell sound
-        if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime != startTime) {
-          bellAudio.play();
-        }
-        
-        // Check if the timer has reached zero
-        if (totalTime === 0) {
-          // Stop the timer
-          clearInterval(timerInterval);
-          timerElement.textContent = '00:00';
-          startButton.disabled = false;
-          bellAudio.play();
-        }
-        
-        totalTime--;
-      }, 1000);
-    });
+      // Check if the timer has reached zero
+      if (totalTime === 0) {
+        // Stop the timer
+        clearInterval(timerInterval);
+        timerElement.textContent = '00:00';
+        startButton.disabled = false;
+        bellAudio.play();
+      }
+      
+      totalTime--;
+    }, 1000);
+  });
   </script>
 </body>
 </html>
