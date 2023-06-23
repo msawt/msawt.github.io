@@ -71,10 +71,10 @@
     startButton.addEventListener('click', function() {
       // Get selected time and subdivision values
       const timeParts = timeInput.value.split(':');
-      const minutes = parseInt(timeParts[0], 10);
-      const seconds = parseInt(timeParts[1], 10);
-      totalTime = (minutes * 60 + seconds) * 1000;
-      startTime = (minutes * 60 + seconds) * 1000;
+      const minutes = parseFloat(timeParts[0]);
+      const seconds = parseFloat(timeParts[1]);
+      totalTime = (isNaN(minutes) ? 0 : minutes) * 60 + (isNaN(seconds) ? 0 : seconds);
+      startTime = totalTime;
       subdivision = parseInt(document.querySelector('#subdivision').value, 10);
       intervalCount = Math.floor(totalTime / subdivision);
       
@@ -83,8 +83,8 @@
       
       // Update the timer display every second
       timerInterval = setInterval(function() {
-        const minutes = Math.floor(totalTime / (60)).toString().padStart(2, '0');
-        const seconds = (totalTime % (60)).toString().padStart(2, '0');
+        const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+        const seconds = (totalTime % 60).toString().padStart(2, '0');
         timerElement.textContent = `${minutes}:${seconds}`;
         
         // Check if subdivision interval is reached and play the bell sound
@@ -102,8 +102,8 @@
         }
         
         totalTime--;
-      }, 1);
+      }, 1000);
     });
-  </script>
+      </script>
 </body>
 </html>
