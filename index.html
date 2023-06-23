@@ -57,6 +57,7 @@
     // Timer variables
     let timerInterval;
     let totalTime;
+    let startTime;
     let subdivision;
     let intervalCount = 0;
     
@@ -73,6 +74,7 @@
       const minutes = parseInt(timeParts[0], 10);
       const seconds = parseInt(timeParts[1], 10);
       totalTime = minutes * 60 + seconds;
+      startTime = minutes * 60 + seconds;
       subdivision = parseInt(document.querySelector('#subdivision').value, 10);
       intervalCount = Math.floor(totalTime / subdivision);
       
@@ -86,7 +88,7 @@
         timerElement.textContent = `${minutes}:${seconds}`;
         
         // Check if subdivision interval is reached and play the bell sound
-        if (totalTime > 0 && totalTime % intervalCount === 0) {
+        if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime != startTime) {
           bellAudio.play();
         }
         
@@ -96,6 +98,7 @@
           clearInterval(timerInterval);
           timerElement.textContent = '00:00';
           startButton.disabled = false;
+          bellAudio.play();
         }
         
         totalTime--;
