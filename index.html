@@ -73,7 +73,11 @@
       const timeParts = timeInput.value.split(':');
       const minutes = parseFloat(timeParts[0]);
       const seconds = parseFloat(timeParts[1]);
-      totalTime = (isNaN(minutes) ? 0 : minutes) * 60 + (isNaN(seconds) ? 0 : seconds);
+      
+      // Calculate the total time in seconds
+      totalTime = isNaN(minutes) ? 0 : Math.floor(minutes * 60);
+      totalTime += isNaN(seconds) ? 0 : Math.floor(seconds);
+      
       startTime = totalTime;
       subdivision = parseInt(document.querySelector('#subdivision').value, 10);
       intervalCount = Math.floor(totalTime / subdivision);
@@ -88,7 +92,7 @@
         timerElement.textContent = `${minutes}:${seconds}`;
         
         // Check if subdivision interval is reached and play the bell sound
-        if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime != startTime) {
+        if (totalTime > 0 && totalTime % intervalCount === 0 && totalTime !== startTime) {
           bellAudio.play();
         }
         
