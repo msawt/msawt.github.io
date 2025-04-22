@@ -1,0 +1,12 @@
+---
+title: "Lightweight Safety Classification Using Pruned Language Models"
+collection: publications
+category: manuscripts
+permalink: /publication/Lightweight Safety Classification Using Pruned Language Models
+excerpt: 'This paper uses the intermediate hidden states of language models as features to train a simple logistic regression classifier. By doing so, our models surpass both fine-tuned models and general-purpose LLMs, reducing parameter count by up to 66%. Additionally, the classifiers can be trained using less than 100 examples without any modification of the underlying language model. This allows for many classification predictions to occur during the model's forward pass with virtually zero computational overhead.'
+date: 20024-12-18
+venue: 'Preprint'
+paperurl: 'https://arxiv.org/abs/2412.13435'
+citation: 'Sawtell, M., Masterman, T., Besen, S., & Brown, J. (2024). Lightweight safety classification using pruned language models. arXiv preprint arXiv:2412.13435.'
+---
+The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
