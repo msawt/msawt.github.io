@@ -9,7 +9,6 @@ tags:
   - nlp
   - explainability
 ---
-# Interpreting Language Models Through Decomposition
 *By decomposing the hidden state of a language model, we are able to interpret *why* a prediction was made.*
 
 ## Machine Learning Interpretability
