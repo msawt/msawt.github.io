@@ -2,7 +2,7 @@
 layout: single
 title:  "Interpreting Language Models Through Decomposition"
 header:
-  teaser: "unsplash-gallery-image-2-th.jpg"
+  teaser: "../../images/decomposition.png"
 categories: 
   - Explainability
 tags:
