@@ -15,7 +15,7 @@ Education
 
 Work experience
 ======
-* 06/2022-Current: Data Scientist
+* 06/2022-Current: Senior Data Scientist
   * Neudesic
   * Performing research with the Applied AI Research Team as well as consulting projects.
 
